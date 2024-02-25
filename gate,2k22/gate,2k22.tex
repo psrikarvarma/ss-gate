@@ -56,11 +56,12 @@
 \renewcommand{\thefigure}{\theenumi}
 \renewcommand{\thetable}{\theenumi}
 \section*{Question}
-Q41) A filter designed using opamps, resistors and capacitors as shown in figure.
-Opamps are ideal with infinite gain and infinite bandwidth. If $\frac{\text{V}_0\brak{\text{S}}}{\text{V}_\text{i}\brak{\text{S}}}$ is an all-pass transfer function, the value of resistor R2 \brak{\text{in k}\Omega} is\\
-\begin{figure}[h]
+Q41) A filter designed using op-amps, resistors and capacitors as shown in figure.
+op-amps are ideal with infinite gain and infinite bandwidth. If $\frac{\text{V}_0\brak{\text{s}}}{\text{V}_\text{i}\brak{\text{s}}}$ is an all-pass transfer function, the value of resistor R2 \brak{\text{in k}\Omega} is\\
+\begin{figure}[htbp]
     \centering
-    \includegraphics[scale=0.44]{figs/bm,41.png}
+    \hspace*{-1.8cm}
+    \includegraphics[scale=0.55]{figs/bm,41.png}
     \label{bm,41}
 \end{figure}
 \begin{center}
@@ -70,5 +71,38 @@ Opamps are ideal with infinite gain and infinite bandwidth. If $\frac{\text{V}_0
 \brak{\text{C}}\ 5\\ 
 \brak{\text{D}}\ 2\ \qquad\qquad\qquad\quad\qquad\qquad\qquad\qquad\brak{\text{GATE BM 2022}}
 \section*{Solution}
+\begin{table}[h]
+    \centering
+    \input{tables/table,gate,2k22.tex}
+    \label{table}
+\end{table}
+\begin{center}
+    Table of Parameters
+\end{center}
 
+for op-amp at $\text{V}_{\text{0}}\brak{\text{s}}$, \brak{\text{we assume $\text{R}_2$ in k$\Omega$}}
+\begin{align}
+\label{1}
+\text{V}_\text{x}&=\frac{5\text{V}_{\text{i}}\brak{\text{s}}}{\text{R}_2}-\frac{\text{V}_0\brak{\text{s}}}{2}
+\end{align}
+
+for op-amp at $\text{V}_{\text{i}}\brak{\text{s}}$,
+\begin{align}
+\label{2}
+\text{V}_\text{x}&=\text{sC}\brak{\frac{\text{V}_\text{0}\brak{\text{s}}-\text{V}_\text{i}\brak{\text{s}}}{1000}}
+\end{align}
+
+from \brak{\ref{1}} and \brak{\ref{2}} transfer function is given by,
+\begin{align}
+\text{H}\brak{\text{s}}&=2\brak{\frac{\text{5000+sC$\text{R}_2$}}{\text{1000+2sC}}}
+\end{align}
+we can observe that for transfer function,
+\begin{align}
+    \text{s}_1&=-\frac{5000}{\text{C$\text{R}_2$}},\ \text{s}_2=-\frac{1000}{\text{2C}}
+\end{align}
+since, for all-pass transfer function $\text{s}_1$=$\text{s}_2$,
+\begin{align}
+    \text{R}_2&=\text{10 k}\Omega
+\end{align}
+so, option B is correct
 \end{document}
