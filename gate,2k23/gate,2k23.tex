@@ -64,7 +64,7 @@ Q27) Let m\brak{\text{t}} be a strictly band-limited signal with bandwidth B and
 \section*{Solution}
 \begin{table}[h]
     \centering
-    \input{tables/table,gate.tex}
+    \input{tables/table,gate,2k23.tex}
     \label{tab:my_label}
 \end{table}
 \begin{center}
@@ -81,25 +81,25 @@ Energy \brak{\text{E}} of the signal m\brak{\text{t}} is given by,
 \begin{align}
     \text{E}&=\int_{-\infty}^{\infty}|\text{m\brak{\text{t}}}|^2\ \text{dt}
 \end{align}
-According to Parvesal's theorem,
+According to Parseval's theorem,
 \begin{align}
 \label{2}
-    \text{E}&=\int_{-\infty}^{\infty}|\text{m\brak{\text{t}}}|^2\ \text{dt}=\frac{1}{2\pi}\int_{-\infty}^{\infty}|\text{M}\brak{\omega}|^2d\omega\ \propto\ \text{A}^2
+    \text{E}&=\int_{-\infty}^{\infty}|\text{m\brak{\text{t}}}|^2\ \text{dt}=\int_{-\infty}^{\infty}|\text{M}\brak{\text{f}}|^2\text{df}\ \propto\ \text{A}^2
 \end{align}
 Fourier transform of y\brak{\text{t}} is given by,
 \begin{align}
-\text{Y}\brak{\omega}&=\int_{-\infty}^{\infty}\text{m}\brak{\text{t}}\text{cos}\brak{\omega_0\text{t}}\text{e}^{\text{j}\omega\text{t}}\text{dt}
+\text{Y}\brak{\text{f}}&=\int_{-\infty}^{\infty}\text{m}\brak{\text{t}}\text{cos}\brak{2\pi\text{f}_0\text{t}}\text{e}^{\text{j}2\pi\text{f}\text{t}}\text{dt}
 \end{align}
 \begin{align}
-\text{Y}\brak{\omega}&=\frac{1}{2}\int_{-\infty}^{\infty}\text{m}\brak{\text{t}}\brak{\text{e}^{\text{j}\omega_0\text{t}}+\text{e}^{-\text{j}\omega_0\text{t}}}\text{e}^{\text{j}\omega\text{t}}\text{dt}
+\text{Y}\brak{\text{f}}&=\frac{1}{2}\int_{-\infty}^{\infty}\text{m}\brak{\text{t}}\brak{\text{e}^{\text{j}2\pi\text{f}_0\text{t}}+\text{e}^{-\text{j}2\pi\text{f}_0\text{t}}}\text{e}^{\text{j}2\pi\text{f}\text{t}}\text{dt}
 \end{align}
 \begin{align}
-\text{Y}\brak{\omega}&=\frac{1}{2}\int_{-\infty}^{\infty}\text{m}\brak{\text{t}}\brak{\text{e}^{\text{j}\brak{\omega+\omega_0}\text{t}}+\text{e}^{\text{j}\brak{\omega-\omega_0}\text{t}}}\text{dt}
+\text{Y}\brak{\text{f}}&=\frac{1}{2}\int_{-\infty}^{\infty}\text{m}\brak{\text{t}}\brak{\text{e}^{\text{j}\brak{2\pi\text{f}+2\pi\text{f}_0}\text{t}}+\text{e}^{\text{j}\brak{2\pi\text{f}-2\pi\text{f}_0}\text{t}}}\text{dt}
 \end{align}
-We have $\omega_0$ = 10B,
+We have $\text{f}_0$=$\frac{10}{2\pi}$B,
 \begin{align}
 \label{1}
-\text{Y}\brak{\omega}&=\frac{1}{2}\brak{\text{M}\brak{\omega+\omega_0}+\text{M}\brak{\omega-\omega_0}}
+\text{Y}\brak{\text{f}}&=\frac{1}{2}\brak{\text{M}\brak{2\pi\text{f}+2\pi\text{f}_0}+\text{M}\brak{2\pi\text{f}-2\pi\text{f}_0}}
 \end{align}
 
 \begin{figure}[h]
