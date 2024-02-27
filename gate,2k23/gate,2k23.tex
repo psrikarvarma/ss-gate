@@ -84,31 +84,27 @@ Energy \brak{\text{E}} of the signal m\brak{\text{t}} is given by,
 According to Parseval's theorem,
 \begin{align}
 \label{2}
-    \text{E}&=\int_{-\infty}^{\infty}|\text{m\brak{\text{t}}}|^2\ \text{dt}=\int_{-\infty}^{\infty}|\text{M}\brak{\text{f}}|^2\text{df}\ \propto\ \text{A}^2
+    \text{E}&=\int_{-\infty}^{\infty}|\text{M}\brak{\text{f}}|^2\text{df}\ \propto\ \text{A}^2
 \end{align}
 Fourier transform of y\brak{\text{t}} is given by,
 \begin{align}
-\text{Y}\brak{\text{f}}&=\int_{-\infty}^{\infty}\text{m}\brak{\text{t}}\text{cos}\brak{2\pi\text{f}_0\text{t}}\text{e}^{\text{j}2\pi\text{f}\text{t}}\text{dt}
-\end{align}
-\begin{align}
-\text{Y}\brak{\text{f}}&=\frac{1}{2}\int_{-\infty}^{\infty}\text{m}\brak{\text{t}}\brak{\text{e}^{\text{j}2\pi\text{f}_0\text{t}}+\text{e}^{-\text{j}2\pi\text{f}_0\text{t}}}\text{e}^{\text{j}2\pi\text{f}\text{t}}\text{dt}
-\end{align}
-\begin{align}
-\text{Y}\brak{\text{f}}&=\frac{1}{2}\int_{-\infty}^{\infty}\text{m}\brak{\text{t}}\brak{\text{e}^{\text{j}\brak{2\pi\text{f}+2\pi\text{f}_0}\text{t}}+\text{e}^{\text{j}\brak{2\pi\text{f}-2\pi\text{f}_0}\text{t}}}\text{dt}
+\text{Y\brak{\text{f}}}&=\text{M\brak{\text{f}}}*\frac{1}{2}\brak{\delta\brak{\text{f}_0+\text{f}}+\delta\brak{\text{f}-\text{f}_0}}
 \end{align}
 We have $\text{f}_0$=$\frac{10}{2\pi}$B,
 \begin{align}
-\label{1}
-\text{Y}\brak{\text{f}}&=\frac{1}{2}\brak{\text{M}\brak{2\pi\text{f}+2\pi\text{f}_0}+\text{M}\brak{2\pi\text{f}-2\pi\text{f}_0}}
+\text{Y\brak{\text{f}}}&=
+\begin{cases}
+    \frac{\text{M\brak{\text{f}}}}{2}&\frac{9\text{B}}{2\pi}\leq\abs{\omega}\leq\frac{12\text{B}}{2\pi}\\
+    0 & \text{otherwise}
+\end{cases}
 \end{align}
-
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.50]{figs/ec,27(1).png}
     \label{fig:enter-label}
 \end{figure}
 
-Energy $\brak{\text{E}_1}$ of the signal y\brak{\text{t}} is given by sum of Energies of individual bandwidth signals,
+Energy $\brak{\text{E}_1}$ of the signal y\brak{\text{t}} is given by sum of energies of individual bandwidth signals,
 
 $$\text{E}_1\propto \brak{\frac{\text{A}}{2}}^2+\brak{\frac{\text{A}}{2}}^2=\frac{\text{A}^2}{2}$$
 from \brak{\ref{2}},\\
