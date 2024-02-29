@@ -17,7 +17,9 @@
 \usepackage[breaklinks=true]{hyperref}
 \usepackage{tkz-euclide} 
 \usepackage{listings}
-\usepackage{gvv}                                        
+\usepackage{gvv}                                    
+\usepackage{tikz}
+\usepackage{pgfplots}
 \def\inputGnumericTable{}                                 
 \usepackage[latin1]{inputenc}                                
 \usepackage{color}                                            
@@ -43,6 +45,11 @@
 \theoremstyle{remark}
 \newtheorem{rem}{Remark}
 \begin{document}
+% Define custom function M(f)
+\pgfmathdeclarefunction{Mf}{1}{%
+  \pgfmathparse{sin(deg(#1))}%
+}
+
 \parindent 0px
 \bibliographystyle{IEEEtran}
 
@@ -68,46 +75,76 @@ Q27) Let m\brak{\text{t}} be a strictly band-limited signal with bandwidth B and
     \label{tab:my_label}
 \end{table}
 \begin{center}
-    Table of Parameters\\[5ex]
+    Table of Parameters\\
 \end{center}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[scale=0.50]{figs/ec,27.png}
-    \label{fig:enter-label}
-\end{figure}
-
-Energy \brak{\text{E}} of the signal m\brak{\text{t}} is given by,
+Let us assume for a case of M\brak{\text{f}},\\[1ex]
+\begin{tikzpicture}
+\begin{axis}[
+    xlabel={f},
+    ylabel={M\brak{\text{f}}},
+    xmin=-1.5, xmax=1.5,
+    ymin=0, ymax=1.2,
+    axis lines=middle,
+    minor tick num=1,
+    width=10cm,
+    height=6cm,
+    xtick={-1,0,1},
+    xticklabels={$-\text{B}$, 0, $\text{B}$},
+    extra x ticks={-2,2},
+    extra x tick labels={$-2B$, $2B$},
+    extra x tick style={grid=none}
+]
+\addplot[blue, thick, domain=-1:1, samples=100] {1};
+\draw[dotted] (axis cs:1,0) -- (axis cs:1,1);
+\draw[dotted] (axis cs:-1,0) -- (axis cs:-1,1);
+\end{axis}
+\end{tikzpicture}\\[1ex]
+Energy \brak{\text{E}} of the signal M\brak{\text{f}} is given by,
 \begin{align}
-    \text{E}&=\int_{-\infty}^{\infty}|\text{m\brak{\text{t}}}|^2\ \text{dt}
-\end{align}
-According to Parseval's theorem,
-\begin{align}
-\label{2}
-    \text{E}&=\int_{-\infty}^{\infty}|\text{M}\brak{\text{f}}|^2\text{df}\ \propto\ \text{A}^2
+\label{1}
+    \text{E}&=\frac{1}{2\pi}\int_{-\text{B}}^{\text{B}}\abs{\text{M}\brak{\text{f}}}^2 \text{df}=\frac{\text{B}}{\pi}
 \end{align}
 Fourier transform of y\brak{\text{t}} is given by,
 \begin{align}
-\text{Y\brak{\text{f}}}&=\text{M\brak{\text{f}}}*\frac{1}{2}\brak{\delta\brak{\text{f}_0+\text{f}}+\delta\brak{\text{f}-\text{f}_0}}
+    \text{Y}\brak{\text{f}}=\text{M}\brak{\text{f}}*\frac{1}{2}\brak{\delta\brak{\text{f}+\text{f}_0}+\delta\brak{\text{f}-\text{f}_0}}
 \end{align}
-We have $\text{f}_0$=$\frac{10}{2\pi}$B,
 \begin{align}
-\text{Y\brak{\text{f}}}&=
-\begin{cases}
-    \frac{\text{M\brak{\text{f}}}}{2}&\frac{9\text{B}}{2\pi}\leq\abs{\text{f}}\leq\frac{12\text{B}}{2\pi}\\
-    0 & \text{otherwise}
-\end{cases}
+    \text{Y}\brak{\text{f}}=\frac{1}{2}\brak{\text{M}\brak{\text{f}+\text{f}_0}+\text{M}\brak{\text{f}-\text{f}_0}}
 \end{align}
-\begin{figure}[h]
-    \centering
-    \includegraphics[scale=0.50]{figs/ec,27(1).png}
-    \label{fig:enter-label}
-\end{figure}
+    
+\begin{tikzpicture}[x=0.42cm, y=3cm] % Adjust the scale as needed
+    % Axis
+    \draw[->] (-12,0) -- (12,0) node[right] {f};
+    \draw[->] (0,0) -- (0,1.5) node[above] {Y\brak{\text{f}}};
+    
+    % Horizontal lines
+    \draw[line width=1.5pt] (-11,0.5) -- (-9,0.5);
+    \draw[line width=1.5pt] (9,0.5) -- (11,0.5);
+    
+    % Labels
+    \node[below] at (-11,0) {$-11\text{B}$};
+    \node[below] at (-9,0) {$-9\text{B}$};
+    \node[below] at (9,0) {$9\text{B}$};
+    \node[below] at (11,0) {$11\text{B}$};
+    
+    % Set y-axis limits
+    \draw[dashed] (-12,0.5) -- (12,0.5) node[right] {$\frac{1}{2}$};
+    
+    % Vertical dotted lines
+    \draw[dotted] (-11,0) -- (-11,0.5);
+    \draw[dotted] (-9,0) -- (-9,0.5);
+    \draw[dotted] (9,0) -- (9,0.5);
+    \draw[dotted] (11,0) -- (11,0.5);
+\end{tikzpicture}\\[1ex]
 
-Energy $\brak{\text{E}_1}$ of the signal y\brak{\text{t}} is given by sum of energies of individual bandwidth signals,
-
-\begin{align}\text{E}_1\propto \brak{\frac{\text{A}}{2}}^2+\brak{\frac{\text{A}}{2}}^2=\frac{\text{A}^2}{2}\end{align}
-from \brak{\ref{2}},\\
-$$\text{E}_1=\frac{\text{E}}{2}$$
-So, option B is correct
+Energy $\brak{\text{E}_1}$ of the signal Y\brak{\text{f}} is given by,
+\begin{align}
+\label{2}
+    \text{E}_1&=\frac{1}{2\pi}\brak{\int_{-11\text{B}}^{-9\text{B}}\frac{1}{4}\ \text{df}+\int_{9\text{B}}^{11\text{B}}\frac{1}{4}\ \text{df}}=\frac{\text{B}}{2\pi}
+\end{align}
+So, from \brak{\ref{1}} and \brak{\ref{2}},
+\begin{align}
+    \text{E}_1&=\frac{\text{E}}{2}
+\end{align}
+Hence, option B is correct
 \end{document}
