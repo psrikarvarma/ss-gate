@@ -17,7 +17,9 @@
 \usepackage[breaklinks=true]{hyperref}
 \usepackage{tkz-euclide} 
 \usepackage{listings}
-\usepackage{gvv}                                        
+\usepackage{gvv}                                    
+\usepackage{tikz}
+\usepackage{pgfplots}
 \def\inputGnumericTable{}                                 
 \usepackage[latin1]{inputenc}                                
 \usepackage{color}                                            
@@ -29,7 +31,7 @@
 \usepackage{ifthen}                                           
 \usepackage{lscape}
 \usepackage[export]{adjustbox}
-
+\usepackage{circuitikz}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{problem}{Problem}
 \newtheorem{proposition}{Proposition}[section]
@@ -42,11 +44,17 @@
 \newcommand{\define}{\stackrel{\triangle}{=}}
 \theoremstyle{remark}
 \newtheorem{rem}{Remark}
+\usetikzlibrary{positioning, arrows.meta}
 \begin{document}
+% Define custom function M(f)
+\pgfmathdeclarefunction{Mf}{1}{%
+  \pgfmathparse{sin(deg(#1))}%
+}
+
 \parindent 0px
 \bibliographystyle{IEEEtran}
 
-\title{GATE - BM 41}
+\title{GATE - BM 22}
 \author{EE23BTECH11215 - Penmetsa Srikar Varma$^{}$% <-this % stops a space
 }
 \maketitle
@@ -56,53 +64,39 @@
 \renewcommand{\thefigure}{\theenumi}
 \renewcommand{\thetable}{\theenumi}
 \section*{Question}
-Q41) A filter designed using op-amps, resistors and capacitors as shown in figure.
-op-amps are ideal with infinite gain and infinite bandwidth. If $\frac{\text{V}_0\brak{\text{s}}}{\text{V}_\text{i}\brak{\text{s}}}$ is an all-pass transfer function, the value of resistor R2 \brak{\text{in k}\Omega} is\\
-\begin{figure}[htbp]
-    \centering
-    \hspace*{-1.8cm}
-    \includegraphics[scale=0.55]{figs/bm,41.png}
-    \label{bm,41}
-\end{figure}
-\begin{center}
-\end{center}
-\brak{\text{A}}\ 1\\
-\brak{\text{B}}\ 10\\
-\brak{\text{C}}\ 5\\ 
-\brak{\text{D}}\ 2\ \qquad\qquad\qquad\quad\qquad\qquad\qquad\qquad\brak{\text{GATE BM 2022}}
+A continous time transfer function, $\text{H\brak{\text{s}}}=\frac{1+\frac{\text{s}}{10^6}}{\text{s}}$ is coverted to a discrete time transfer function, $\text{H\brak{\text{z}}}$ using a bi-linear transformation at 100 MHz sampling rate. The pole of $\text{H\brak{\text{z}}}$ is located at z = ? 
 \section*{Solution}
 \begin{table}[h]
     \centering
-    \input{tables/table,gate,2k22.tex}
-    \label{table}
+    \input{tables/table,gate,2k21.tex}
+    \label{parameter table}
 \end{table}
 \begin{center}
-    Table of Parameters
+    Table of Parameters\\[5ex]
 \end{center}
 
-for op-amp at $\text{V}_{\text{0}}\brak{\text{s}}$, \brak{\text{we assume $\text{R}_2$ in k$\Omega$}}
+\begin{tikzpicture}[auto, node distance=1.75cm,>=Latex]
+    % Define blocks
+    \node [draw, rectangle] (input) {\(\text{H\brak{\text{s}}}\)};
+    \node [draw, rectangle, right=of input] (system) {sampling $\brak{\text{at 100 MHtz}}$ };
+    \node [draw, rectangle, right=of system] (output) {\(\text{H\brak{\text{z}}}\)};
+    \node [draw, rectangle, below=of system] (default) {$\text{s}=\frac{2}{\text{T}_\text{s}}\brak{\frac{1-\text{z}^{-1}}{1+\text{z}^{-1}}}$};
+    
+    % Connect blocks
+    \draw [->] (input) -- (system);
+    \draw [->] (system) -- (output);
+    \draw [->] (default) -- (system);
+\end{tikzpicture}\\
+
+We know that,
 \begin{align}
 \label{1}
-\text{V}_\text{x}&=\frac{5\text{V}_{\text{i}}\brak{\text{s}}}{\text{R}_2}-\frac{\text{V}_0\brak{\text{s}}}{2}
+    \text{H\brak{\text{z}}}&=\text{H\brak{\text{s}}}\Bigg|_{\text{s}=\frac{2}{\text{T}_\text{s}}\brak{\frac{1-\text{z}^{-1}}{1+\text{z}^{-1}}}}
 \end{align}
+So, from \brak{\ref{1}}
+\begin{align}
+    \text{H\brak{\text{z}}}&=5\times10^{-9}\brak{\frac{201-199\text{z}^{-1}}{1-z^{-1}}}
+\end{align}
+So, $\text{s}_0$ is at z=1\\
 
-for op-amp at $\text{V}_{\text{i}}\brak{\text{s}}$,
-\begin{align}
-\label{2}
-\text{V}_\text{x}&=\text{sC}\brak{\frac{\text{V}_\text{0}\brak{\text{s}}-\text{V}_\text{i}\brak{\text{s}}}{1000}}
-\end{align}
-
-from \brak{\ref{1}} and \brak{\ref{2}} transfer function is given by,
-\begin{align}
-\text{H}\brak{\text{s}}&=2\brak{\frac{\text{5000+sC$\text{R}_2$}}{\text{1000+2sC}}}
-\end{align}
-we can observe that for transfer function,
-\begin{align}
-    \text{s}_1&=-\frac{5000}{\text{C$\text{R}_2$}},\ \text{s}_2=-\frac{1000}{\text{2C}}
-\end{align}
-since, for all-pass transfer function $\text{s}_1$=$\text{s}_2$,
-\begin{align}
-    \text{R}_2&=\text{10 k}\Omega
-\end{align}
-so, option B is correct
 \end{document}
