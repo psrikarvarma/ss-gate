@@ -88,12 +88,18 @@ A continous time transfer function, $\text{H\brak{\text{s}}}=\frac{1+\frac{\text
     \draw [->] (default) -- (system);
 \end{tikzpicture}\\
 
-We know that,
+From above,
 \begin{align}
 \label{1}
-    \text{H\brak{\text{z}}}&=\text{H\brak{\text{s}}}\Bigg|_{\text{s}=\frac{2}{\text{T}_\text{s}}\brak{\frac{1-\text{z}^{-1}}{1+\text{z}^{-1}}}}
+    \text{H\brak{\text{z}}}&=\text{H}\brak{2\text{F}_\text{s}\brak{\frac{1-\text{z}^{-1}}{1+\text{z}^{-1}}}}
 \end{align}
 So, from \brak{\ref{1}}
+\begin{align}
+    \text{H\brak{\text{z}}}&=\frac{1+\frac{2\text{F}_{\text{s}}}{10^6}\brak{\frac{1-\text{z}^{-1}}{1+\text{z}^{-1}}}}{2\text{F}_{\text{s}}\brak{\frac{1-\text{z}^{-1}}{1+\text{z}^{-1}}}}
+\end{align}
+\begin{align}
+    \text{H\brak{\text{z}}}&=\frac{1}{200\times10^6}\brak{\frac{1+\text{z}^{-1}+200\brak{1-z^{-1}}}{1-z^{-1}}}
+\end{align}
 \begin{align}
     \text{H\brak{\text{z}}}&=5\times10^{-9}\brak{\frac{201-199\text{z}^{-1}}{1-z^{-1}}}
 \end{align}
